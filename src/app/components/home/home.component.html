@@ -1,0 +1,143 @@
+<section>
+    <div class="wow fadeInDown wcontent bg-gradient-to-br from-[#072a2b] to-[#3d8185] text-white flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 md:pr-8 p-6 md:p-12 lg:p-24">
+            <h1 class="title mb-4 !text-white">Never been easier<br>Finding Cozy & Vibrant Environment</h1>
+            <p class="mb-6">With millions of people travelling daily, our Home program allows you to find rentals that are perfect you.</p>
+            <ul class="mb-6 space-y-2">
+                <li class="flex items-center">
+                    <svg class="w-6 h-6 text-primary mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Fully furnished spaces
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-6 h-6 text-primary mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Ready-to-use wifi
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-6 h-6 text-primary mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Tour and book online
+                </li>
+            </ul>
+            <a href="#" class="text-primary hover:underline">Browse Home rentals &rarr;</a>
+        </div>
+        <div class="mt-8 md:mt-0 md:w-1/2">
+            <img src="bg-host.jpg" alt="Person working from home" class="rounded-lg shadow-lg">
+        </div>
+    </div>
+</section>
+
+<section class="wow fadeInDown">
+    <div class="wcontent section">
+        <h1 class="title">Move-in ready spaces</h1>
+        <p class="sub-title">Lets get you started in no time. Browse, book and pay for your rentals now</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-10 2xl:gap-20 mt-16">
+            <div class="flex flex-col gap-4">
+                <img src="/briefcase.png" alt="" width="50">
+                <h4 class="title-medium">Prices for your budget</h4>
+                <p class="sub-title">Find unfurnished rooms for rent to luzury apartment in cities and small towns across the US</p>
+            </div>
+            <div class="flex flex-col gap-4">
+                <img src="/reading-book.png" alt="" width="50">
+                <h4 class="title-medium">Flexible stays</h4>
+                <p class="sub-title">No more year-long leases. Find a space for any length of stay between 1-12+ months.</p>
+            </div>
+            <div class="flex flex-col gap-4">
+                <img src="/idea.png" alt="" width="50">
+                <h4 class="title-medium">All the essentials</h4>
+                <p class="sub-title">Browse apartments with a range of amenities and furnishings to fit your budget and needs.</p>
+            </div>
+            <div class="flex flex-col gap-4">
+                <img src="/online-meeting.png" alt="" width="50">
+                <h4 class="title-medium">Everything is online</h4>
+                <p class="sub-title">Easily book listings, chat with hosts, sign leases, and pay deposits and monthly rent.</p>
+            </div>
+        </div>
+    </div>    
+</section>
+
+<section>
+    <div class="wcontent section">
+        <h2 class="title">Find Rentals in cities</h2>
+        <p class="sub-title lg:w-1/2 my-2">Thousands of renters find a rental for their next job, exploring a new city, relocating, renovating, going on a business trip, or visiting family and friends.</p>
+        <a [routerLink]="['/']" class="text-primary sub-title underline">Browse all rentals</a>
+        <div class="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-5 lg:gap-5 mt-16">
+            @for(item of list().cities; track item;) {
+                <a [routerLink]="['/']">
+                    <div class="h-56 lg:h-72 w-full rounded-md overflow-hidden relative hover:opacity-80 transition ease-linear duration-300">
+                        <img ngSrc="cities/{{ item.image }}" alt=" {{ item.name }} image" fill>
+                    </div>
+                    <div class="py-5">
+                        <h4 class="title-small underline">{{ item.name }}</h4>
+                        <span class="sub-title">{{ item.state ? (item.state + ',') : '' }} {{ item.country }}</span>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>    
+</section>
+
+<section class="bg-gray-100">
+    <div class="wcontent section">
+        <h2 class="title">Why book with us</h2>
+        <p class="sub-title lg:w-1/3 my-2">We offer all you need to book your vacation home with confidence</p>
+        <a [routerLink]="['/']" class="text-primary sub-title underline">Read about us</a>
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-10 2xl:gap-20 mt-16">
+            <div class="flex flex-col gap-4">
+                <img src="/price-tag.png" alt="" width="50">
+                <h4 class="title-medium">Best pricing</h4>
+                <p class="sub-title">Book directly for the lowest rates</p>
+            </div>
+            <div class="flex flex-col gap-4">
+                <img src="/resignation.png" alt="" width="50">
+                <h4 class="title-medium">Worry-free cancellation</h4>
+                <p class="sub-title">Get a full refund if you cancel within 24 hours of booking*</p>
+            </div>
+            <div class="flex flex-col gap-4">
+                <img src="/customer-support.png" alt="" width="50">
+                <h4 class="title-medium">24/7 guest service</h4>
+                <p class="sub-title">Count on care—just a call, text, or email away</p>
+            </div>
+            <div class="flex flex-col gap-4">
+                <img src="/clean.png" alt="" width="50">
+                <h4 class="title-medium">Professional cleaning</h4>
+                <p class="sub-title">Enjoy a completely cleaned and inspected home, plus fresh linens</p>
+            </div>
+        </div>
+    </div>    
+</section>
+
+
+<section>
+    <div class="grid md:grid-cols-5 gap-10 wcontent section">
+
+        <div class="md:col-span-2 lg:p-10">
+            <h2 class="title">Your questions, answered</h2>
+            <p class="sub-title">Answers to the most frequently asked questions.</p>
+        </div>
+        <div class="md:col-span-3 mx-auto  max-h-screen overflow-y-auto">
+            <div class="hs-accordion-group">
+                @for(item of list().faqs; track item; let first = $first){
+                    <div class="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-3 {{ first && 'active' }}" id="hs-basic-with-title-and-arrow-stretched-heading-{{ item.selector }}">
+                        <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-none focus:text-gray-500" [attr.aria-expanded]="first ? true : false"  
+                        [attr.aria-controls]="'hs-basic-with-title-and-arrow-stretched-collapse-' + item.selector ">
+                            {{ item.title }}
+                            <svg class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            <svg class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                        </button>
+                        <div id="hs-basic-with-title-and-arrow-stretched-collapse-{{ item.selector }}" class="hs-accordion-content w-full {{ !first && 'hidden'}} overflow-hidden transition-[height] duration-300" role="region" [attr.aria-labelledby]="'hs-basic-with-title-and-arrow-stretched-heading-'+item.selector">
+                            <p class="text-gray-800 ">
+                                {{ item.description }}
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+<section>
+

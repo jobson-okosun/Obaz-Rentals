@@ -1,0 +1,100 @@
+@let selectMonth = toJson({
+    placeholder: "Select month",
+    toggleTag: "<button type='button' aria-expanded='false'></button>",
+    toggleClasses: "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative flex text-nowrap w-full cursor-pointer text-start font-medium text-gray-800 hover:text-blue-600 focus:outline-none focus:text-blue-600 before:absolute before:inset-0 before:z-[1]",
+    dropdownClasses: "mt-2 z-50 w-32 max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
+    optionClasses: "p-2 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100",
+    optionTemplate: "<div class='flex justify-between items-center w-full'><span data-title></span><span class='hidden hs-selected:block'><svg class='shrink-0 size-3.5 text-gray-800' xmlns='http:.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg></span></div>"
+});
+
+@let selectYear = toJson({
+    placeholder: "Select year",
+    toggleTag: "<button type='button' aria-expanded='false'></button>",
+    toggleClasses: "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative flex text-nowrap w-full cursor-pointer text-start font-medium text-gray-800 hover:text-blue-600 focus:outline-none focus:text-blue-600 before:absolute before:inset-0 before:z-[1]",
+    dropdownClasses: "mt-2 z-50 w-20 max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
+    optionClasses: "p-2 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100",
+    optionTemplate: "<div class='flex justify-between items-center w-full'><span data-title></span><span class='hidden hs-selected:block'><svg class='shrink-0 size-3.5 text-gray-800' xmlns='http:.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg></span></div>"
+});
+
+
+
+<!-- Calendar -->
+<div class="p-3 space-y-0.5">
+    <!-- Months -->
+    <div class="grid grid-cols-5 items-center gap-x-3 mx-1.5 pb-3">
+        <!-- Prev Button -->
+        <div class="col-span-1">
+            <button (click)="previousMonth(month, year);" type="button"
+                class="size-8 flex justify-center items-center text-gray-800 hover:bg-gray-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-100"
+                aria-label="Previous">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Month / Year -->
+        <div class="col-span-3 flex justify-center items-center gap-x-1">
+            <div class="relative">
+                <select #month (change)="changeMonth($event)" [value]="selectedMonth()" [attr.data-hs-select]="selectMonth" class="hidden capitalize">
+                    @for(item of months; track item; let i=$index) {
+                        @if(i == selectedMonth()) {
+                            <option value="{{ i }}" [attr.selected]="true">{{ item }}</option>
+                        }
+                        @else { <option value="{{ i }}">{{ item }}</option> }
+                    }
+                </select>
+            </div>
+
+            <span class="text-gray-800">/</span>
+
+            <div class="relative">
+                <select #year [attr.data-hs-select]="selectYear"  (change)="changeYear($event)" class="hidden">
+                    @for(item of getYears(); track item; let i=$index) {
+                        @if(item == selectedYear()) {
+                            <option value="{{ item }}" [attr.selected]="true">{{ item }}</option>
+                        } @else { <option value="{{ item }}">{{ item }}</option> }
+                        
+                    }
+                </select> 
+            </div>
+        </div>
+
+        <!-- Next Button -->
+        <div class="col-span-1 flex justify-end">
+            <button (click)="nextMonth(month, year)" type="button"
+                class="size-8 flex justify-center items-center text-gray-800 hover:bg-gray-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-100"
+                aria-label="Next">
+                <svg class="shrink-0 size-4" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Weeks -->
+    <div class="grid grid-cols-7 gap-1">
+        @for(item of weekDays; track item; let i=$index) {
+            <span class="text-center text-sm text-gray-500">{{ item }} </span>
+        }
+    </div>
+
+    <!-- Days -->
+    <div class="grid grid-cols-7 gap-1">
+        @for(week of calendarDays; track i; let i=$index) {
+            <div class="contents">
+                @for(day of week; track day.date) {
+                    <div>
+                        <button (click)="selectDate(day)" type="button" [disabled]="!day.isCurrentMonth" [class]="day.isCurrentMonth ? 'current-month' : 'not-current-month'" [ngClass]="{'bg-blue-500 !text-white rounded-full': day.isToday}">
+                            {{ day.date }}
+                        </button>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+

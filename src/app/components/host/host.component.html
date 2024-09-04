@@ -1,0 +1,147 @@
+<section>
+    <div
+        class="wow fadeInDown bg-gradient-to-br from-[#072a2b] to-[#3d8185] text-white flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 p-6 md:p-12 lg:p-24">
+            <h1 class="title mb-4 !text-white">
+                Discover full sevice<br />rental management
+            </h1>
+            <p class="mb-6">
+                Join our community of hosts who earn more rental income and increase
+                their occupancy rate for their monthly rentals and rooms for rent.
+            </p>
+            <a href="#" class="text-primary hover:underline">Join as Host&rarr;</a>
+        </div>
+        <div class="mt-8 md:mt-0 md:w-1/2">
+            <img src="bg-host.jpg" alt="Person working from home" class="rounded-lg shadow-lg" />
+        </div>
+    </div>
+</section>
+
+<section class="section wcontent">
+    <h2 class="title">How it works</h2>
+    <p class="sub-title lg:w-1/3 mt-2 mb-8">
+        You can do everything in {{ appName() }} — from adding your properties to getting paid
+        by your new renters.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+            <div
+                class="flex justify-center items-center w-12 h-12 mb-4 text-lg font-bold border rounded-full">
+                1
+            </div>
+            <h3 class="text-xl font-semibold mb-2">List your space for free.</h3>
+            <p class="text-gray-600 mb-4">
+                Add a listing in 9 minutes or less. You control the monthly
+                availability, pricing, and house rules.
+            </p>
+        </div>
+        <div>
+            <div
+                class="flex justify-center items-center w-12 h-12 mb-4 text-lg font-bold border rounded-full">
+                2
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Receive requests.</h3>
+            <p class="text-gray-600 mb-4">
+                View renter's profiles and communicate with them to ask more questions
+                through {{ appName() }}.
+            </p>
+        </div>
+        <div>
+            <div
+                class="flex justify-center items-center w-12 h-12 mb-4 text-lg font-bold border rounded-full">
+                3
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Accept requests.</h3>
+            <p class="text-gray-600 mb-4">
+                You are free to accept or decline whoever you want to live in your
+                space.
+            </p>
+        </div>
+        <div>
+            <div
+                class="flex justify-center items-center w-12 h-12 mb-4 text-lg font-bold border rounded-full">
+                4
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Get paid.</h3>
+            <p class="text-gray-600 mb-4">
+                Accepted renters pay their initial deposit and all following payments
+                through {{ appName() }}.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="wow fadeInDown wcontent section-medium flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 md:pr-8">
+            <h1 class="title mb-4">Reach more<br>professional renters</h1>
+            <p class="mb-6">{{ appName() }} renters are usually moving for work or education opportunities — from business consultants to medical professionals and beyond.</p>
+            <div href="#" class="text-primary mb-5">Each Renter provides &rarr;</div>
+            <ul class="mb-6 space-y-2">
+                <li class="flex items-center">
+                    <svg class="w-6 h-6 text-primary mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Work experience
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-6 h-6 text-primary mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Education
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-6 h-6 text-primary mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Short bio
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-6 h-6 text-primary mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Background check (upon request)
+                </li>
+            </ul>
+            
+        </div>
+        <div class="mt-8 md:mt-0 md:w-1/2">
+            <img src="caption.jpg" alt="Person working from home" class="rounded-lg shadow-lg">
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="grid md:grid-cols-5 gap-10 wcontent section">
+
+        <div class="md:col-span-2 lg:p-10">
+            <h2 class="title">Your questions, answered</h2>
+            <p class="sub-title">Answers to the most frequently asked questions.</p>
+        </div>
+        <div class="md:col-span-3 mx-auto  max-h-screen overflow-y-auto">
+            <div class="hs-accordion-group">
+                @for(item of list().hostFaqs; track item; let first = $first){
+                    <div class="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-3 {{ first && 'active' }}" id="hs-basic-with-title-and-arrow-stretched-heading-{{ item.selector }}">
+                        <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-none focus:text-gray-500" [attr.aria-expanded]="first ? true : false"  
+                        [attr.aria-controls]="'hs-basic-with-title-and-arrow-stretched-collapse-' + item.selector ">
+                            {{ item.title }}
+                            <svg class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            <svg class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                        </button>
+                        <div id="hs-basic-with-title-and-arrow-stretched-collapse-{{ item.selector }}" class="hs-accordion-content w-full {{ !first && 'hidden'}} overflow-hidden transition-[height] duration-300" role="region" [attr.aria-labelledby]="'hs-basic-with-title-and-arrow-stretched-heading-'+item.selector">
+                            <p class="text-gray-800 ">
+                                {{ item.description }}
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+<section>
+
+<section class="section wcontent mb-20 p-5 lg:p-20 text-white bg-gray-900">
+    <h2 class="title !text-white mb-4">Ready to Join us?</h2>
+    <p class="text-lg mb-8 text-gray-300">Join thousands of hosts who list thier spaces with us</p>
+    <a href="#" class="btn w-max">Get Started</a>
+</section>

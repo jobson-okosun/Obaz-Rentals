@@ -1,0 +1,42 @@
+<div class="border-b lg:border-0 wcontent pt-3 pb-7 gap-4 flex flex-wrap lg:flex-nowrap items-center lg:items-start justify-between text-sm">
+    <div class="flex-1 flex items-center justify-between">
+        <a href="" class="flex items-center gap-1 text-3xl">
+            <img [srcset]="'/logo.svg'" width="32" alt="{{ appName }} logo" class="w-8 h-auto">
+            <span class="flex-1 font-bold">{{ appName }}</span>
+        </a>
+    </div>
+    <div class="order-last lg:order-1 w-full lg:w-[60%]">
+        <app-search  class="w-full"/>
+    </div>
+    <ul class="order-2 lg:last-last flex-1 flex gap-5 items-center justify-end">
+        <li class="hidden lg:block"><a class="outlined" [href]="'/host'">List Home</a></li>
+        <li class="flex items-center border rounded-full px-2.5 py-1 gap-x-4 lg:gap-x-2">
+            <span (click)="openNav()">
+                <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2.7" d="M5 7h14M5 12h14M5 17h14"/>
+                  </svg>
+            </span>
+            <div class="flex-1 hs-dropdown [--trigger:hover] relative">
+                <span aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" id="hs-dropdown-hover-event" class="hs-dropdown-toggle cursor-pointer inline size-[38px] rounded-full overflow-hidden">
+                    <svg class="size-full text-white" width="35" height="35" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.62854" y="0.359985" width="15" height="15" rx="7.5" fill="#404242"></rect>
+                    <path d="M8.12421 7.20374C9.21151 7.20374 10.093 6.32229 10.093 5.23499C10.093 4.14767 9.21151 3.26624 8.12421 3.26624C7.0369 3.26624 6.15546 4.14767 6.15546 5.23499C6.15546 6.32229 7.0369 7.20374 8.12421 7.20374Z" fill="currentColor"></path>
+                    <path d="M11.818 10.5975C10.2992 12.6412 7.42106 13.0631 5.37731 11.5537C5.01171 11.2818 4.69296 10.9631 4.42107 10.5975C4.28982 10.4006 4.27107 10.1475 4.37419 9.94123L4.51482 9.65059C4.84296 8.95684 5.53671 8.51624 6.30546 8.51624H9.95231C10.7023 8.51624 11.3867 8.94749 11.7242 9.62249L11.8742 9.93184C11.968 10.1475 11.9586 10.4006 11.818 10.5975Z" fill="currentColor"></path>
+                    </svg>
+                </span>
+                <div class="z-10 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-1 space-y-0.5 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full divide-y divide-gray-200 font-medium" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-hover-event">
+                    <div class="py-2 first:pt-0 last:pb-0">
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 " href="#">Sign up</a>
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 " href="#">Login</a>
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 " href="#">Sign out</a>
+                    </div>
+                    <div class="py-2 first:pt-0 last:pb-0">
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" [routerLink]="['/host']">List Home</a>
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" [routerLink]="['/contact']">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<nav class="fixed top-0 left-0 h-screen bg-gray-900 w-[80%] z-20 lg:z-0 lg:h-max lg:bg-transparent lg:w-full lg:relative"></nav>

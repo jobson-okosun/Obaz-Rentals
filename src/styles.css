@@ -1,1 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply text-base font-semibold font-figtree text-gray-900 
+}
+
+.wcontent {
+    @apply w-full xl:w-[90%] 2xl:w-[75%] px-4 mx-auto lg:px-0
+}
+
+.outlined {
+    @apply hover:bg-gray-100 py-2.5 px-4 rounded-full cursor-pointer transition duration-300
+}
+
+.filled {
+    @apply hover:bg-opacity-80 py-2.5 px-4 rounded-full cursor-pointer transition duration-300
+}
+
+.section {
+    @apply py-20 lg:py-24
+}
+
+.section-medium { 
+    @apply py-10 lg:py-10
+}
+
+.title {
+    @apply text-2xl lg:text-4xl font-black capitalize tracking-normal text-gray-900 
+}
+
+.title-medium {
+    @apply text-lg lg:text-2xl font-black capitalize text-gray-900 
+}
+
+.title-small {
+    @apply text-base lg:text-lg font-bold capitalize tracking-tight text-gray-900 
+}
+
+.sub-title {
+    @apply font-medium text-gray-900 
+}
+
+.text {
+    @apply font-medium text-gray-600
+}
+
+.curved {
+    clip-path: ellipse(70% 100% at 50% 0%);
+}
+
+.swiper-enabled swiper-container::part(bullet-active) {
+    background-color: #ffffff;
+}
+
+.btn {
+    @apply bg-primary text-white p-3 rounded-md hover:bg-primary/70 transition ease-in-out duration-300 flex items-center justify-center gap-1
+}
+
+button:disabled {
+    @apply opacity-50
+}
+

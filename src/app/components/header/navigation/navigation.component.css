@@ -1,0 +1,8 @@
+.nav-item {
+    @apply py-2 lg:py-0 lg:pb-1 flex items-center gap-3 lg:gap-1 text-sm border-b-2 border-transparent hover:border-primary transition duration-300 capitalize text-white lg:text-gray-900
+}
+
+
+.active-nav-item {
+    @apply border-primary
+}

@@ -1,0 +1,20 @@
+
+<section>
+    <div class="wow fadeInDown wcontent section-medium">
+
+        <div class="flex">
+            <span class="rounded-md py-3 px-4 border flex items-center justify-center gap-3 cursor-pointer hover:bg-gray-100 transiton">
+                <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M10.83 5a3.001 3.001 0 0 0-5.66 0H4a1 1 0 1 0 0 2h1.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-9.17ZM4 11h9.17a3.001 3.001 0 0 1 5.66 0H20a1 1 0 1 1 0 2h-1.17a3.001 3.001 0 0 1-5.66 0H4a1 1 0 1 1 0-2Zm1.17 6H4a1 1 0 1 0 0 2h1.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-9.17a3.001 3.001 0 0 0-5.66 0Z"/>
+                </svg> 
+                <span>Filter</span>         
+            </span>
+        </div>
+
+        <div class="{{ swiperSelector }} grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 lg:gap-5 mt-10">
+            @for(item of list().search; track item;) {
+                <rental [prop]="item" />
+            }
+        </div>
+    </div>    
+</section>

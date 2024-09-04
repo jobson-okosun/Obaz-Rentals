@@ -1,0 +1,38 @@
+<a [routerLink]="item()?.url">
+    <div class="relative group">
+        <swiper-container init="false">
+            @for(imageItem of item()?.images; track imageItem; let i = $index) {
+                <swiper-slide>
+                    <div class="h-56 lg:h-72 w-full rounded-md overflow-hidden relative hover:opacity-80 transition ease-linear duration-300 bg-gray-50">
+                        <img width="auto" height="auto" ngSrc="cities/{{ imageItem.image }}" alt=" {{ imageItem.name }} image" fill>
+                    </div>
+                </swiper-slide>
+            }
+        </swiper-container>
+        <button type="button" (click)="$event.preventDefault(); $event.stopPropagation()" class="absolute top-1/2 left-0 z-10 items-center h-10 w-10 justify-center mx-1 lg:mx-3 cursor-pointer hidden group-hover:flex bg-gray-100 transition duration-300 rounded-full transform -translate-y-1/2">
+            <svg class="w-5 h-5 text-gray-700 " aria-hidden="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="m15 19-7-7 7-7"/>
+            </svg>                                              
+        </button>
+        <button type="button" (click)="$event.preventDefault(); $event.stopPropagation()" class="absolute top-1/2 right-0 z-10 items-center h-10 w-10 justify-center mx-1 lg:mx-3 cursor-pointer hidden group-hover:flex bg-gray-100 transition duration-300 rounded-full transform -translate-y-1/2">
+            <svg class="w-5 h-5 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" d="m9 5 7 7-7 7"/>
+            </svg>                     
+        </button> 
+        <span class="absolute z-10 top-0 right-0 m-3 rounded-full bg-transparent hover:bg-[rgba(0,0,0,0.6)] h-10 w-10 flex items-center justify-center">
+            <svg class="w-6 h-6 text-gray-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="rgba(0, 0, 0,0.5)" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1" d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z"/>
+            </svg>    
+        </span> 
+                
+    </div>                    
+    <div class="py-2">
+        <h4 class="title-small truncate" [innerText]="item()?.title"></h4>
+        <p class="text-sm text-gray-500 mt-1" [innerHTML]="item()?.details"></p>
+        <p class="text-sm text-gray-500" [innerText]="item()?.location"></p>
+        <div class="flex justify-between items-center">
+            <p class="title-small !text-sm">{{ item()?.price |  currency: item()?.locale?.currencyName }} <span class="text-sm font-medium">night</span></p>
+            <span class="text-sm text-gray-500" [innerText]="item()?.rating"></span>
+        </div>
+    </div>              
+</a>

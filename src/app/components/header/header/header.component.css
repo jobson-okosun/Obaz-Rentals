@@ -1,0 +1,21 @@
+nav {
+    display: block;
+}
+
+@media screen and (max-width: 1024px) {
+    nav {
+        display: none;
+        animation: slideInLeft 0.3s ease forwards;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
