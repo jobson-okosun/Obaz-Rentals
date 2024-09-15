@@ -2,7 +2,7 @@
     <div class="wcontent section-medium">
         <h1 class="title">Find Rentals in cities</h1>
         <p class="sub-title lg:w-1/2 my-2">Thousands of renters find their next job rental, explore new cities, relocate, renovate, travel for business, or visit family and friends through us.</p>
-        <div class="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-6 gap-5 lg:gap-5 mt-10">
+        <div class="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-6 gap-3 lg:gap-5 mt-10">
             @for(item of list().cities; track item;) {
                 <city [prop]="item" />
             }
@@ -12,11 +12,13 @@
 
 <section>
     <div class="wcontent section-medium">
-        <h1 class="title">Hot Rentals</h1>
-        <div class="{{ swiperSelector }} grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 lg:gap-5 mt-10">
-            @for(item of list().rentals; track item;) {
-                <rental [prop]="item" />
-            }
-        </div>
+        <h1 #title class="title">Hot Rentals</h1>
+        @defer (on viewport(title)) {
+            <div class="{{ swiperSelector }} grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 lg:gap-5 mt-10">
+                @for(item of list().rentals; track item;) {
+                    <rental [prop]="item" />
+                }
+            </div>
+        }
     </div>    
 </section>

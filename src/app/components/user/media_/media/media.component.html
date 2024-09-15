@@ -1,0 +1,60 @@
+
+<div class="lg:w-2/3 wow fadeInDown">
+    <input #file  id="fileInput" type="file" (change)="onFileChange($event)" multiple [ngStyle]="{'display':'none'}" />
+
+    <div (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)"  class="transition ease-linear duration-300 bg-white rounded-lg border-2 border-dashed flex flex-col items-center justify-center gap-1 p-10 cursor-pointer drop-area">
+        <span class="material-symbols-outlined text-gray-300" style="font-size: 60px">add_photo_alternate</span>
+        <span class="text-sm font-bold text-center"> 
+            Drop your files(s) here or 
+            <button type="button" class="text-primary hover:underline"  (click)="file.click()"> browser</button>
+        </span>
+        <span class="text-3xs font-semibold text-gray-400 text-center">Max file size 900kb</span>
+    </div>
+    <p class="text-2xs text text-center mt-1">Supported formats .jpg | .jpeg | .png</p>
+    
+    @if(imagePreviews().length) {
+        <div class="flex flex-col gap-2 mt-5">
+            @for(item of imagePreviews(); track item; let index = $index) {
+                <div class="bg-gray-50 border p-2 rounded-sm flex items-start gap-3 relative wow fadeInDown">
+                    <div class="w-[40px] h-[40px] bg-white border rounded-md items-center justify-center overflow-hidden p-2">
+                        <img [src]="item.url" alt="Selected Image" class="object-cover object-center w-full h-full" />
+                    </div>
+                    <div class="flex-1 overflow-hidden">
+                        <h4 class="text-2xs md:text-xs font-bold truncate -mb-1">{{item.name}}</h4>
+                        <span class="text-gray-400 text-xs">{{item.size | fileSize }}</span>
+                    </div>
+                    <button title="Remove image" class="material-symbols-outlined h-8 w-8 border rounded-full bg-white text-black font-bold absolute top-1/2 -translate-y-1/2 right-[5px]" style="font-size: 20px" type="button" (click)="deleteFile(index)">close</button>
+                </div>
+            }
+        </div>
+    }
+
+    @if(pending()) {
+        <div class="text-xs text-gray-500 mt-10">
+            Uploading: 
+            <span class="font-bold text-blue-500">
+                @if(uploadProgress() !== 100) {
+                    ...
+                }
+                @else {
+                    complete
+                }
+            </span>
+        </div>
+        <div class="bg-white wow fadeInDown p-3 flex items-center justify-between">
+            <div class="bg-primary-light rounded-full flex-1">
+                <div style="transition: 0.2s all" [style.width.%]="uploadProgress()" class="text-center text-white rounded-full bg-blue-500 {{uploadProgress() == 100 && '!bg-green-500'}}  xl:h-[5px] h-[6px]"></div>
+            </div>
+            <span class="text-xs font-semibold text-gray-400">{{ uploadProgress() }}%</span>
+        </div>
+    }
+
+    @if(imagePreviews().length) {
+        <div class="wow fadeInDown flex lg:justify-end gap-2 my-5">
+            <button [disabled]="pending()" (click)="uploadImages()" type="button" class="btn min-w-full lg:min-w-max">
+                    <span>Upload photos</span> 
+            </button>
+        </div>
+    }
+    
+</div>

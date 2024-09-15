@@ -1,0 +1,7 @@
+<mat-dialog-content [className]="'md:w-[400px] h-[400px]'">
+ <div [style.backgroundImage]="'url(' + data.image.url + ')'" class="bg-gray-200 h-full w-full bg-center bg-cover"></div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Update Photo</button>
+</mat-dialog-actions>

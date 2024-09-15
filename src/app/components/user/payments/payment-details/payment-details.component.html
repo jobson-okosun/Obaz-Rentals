@@ -1,0 +1,69 @@
+<h1 class="title-medium mb-5 lg:border-b lg:pb-5 flex justify-between">
+    <span>Payment Details</span>
+    <span (click)="downloadPDF()" [title]="'Download'" class="material-symbols-outlined icon-btn no-pr">download</span>
+</h1>
+
+<!-- <div> -->
+  <div #payment class="lg:w-1/2 h-full rounded-lg">
+    <div class="grid grid-cols-1 text divide-y text !text-sm">
+
+      <a [routerLink]="['']" class="flex gap-3 mb-5">
+          <div class="bg-cover bg-center bg-no-repeat h-10 w-10 rounded-full bg-gray-50" [style.backgroundImage]="'url(' + '/bg-host.jpg' + ')'"></div>
+          <div class="flex-1 flex flex-col">
+              <h4 class="title-small -mt-1 mb-1 lg:-mb-1 ">Entire home in Bozyer, orem ipsum....</h4>
+              <p class="">5 guests · 2 bedrooms · 3 beds · 2 baths</p>
+          </div>
+      </a>
+      
+      <div class="py-2 flex flex-col">
+        <label class="sub-title mb-2">Transaction ID</label>
+        <p>{{ state().payment.transactionId }}</p>
+      </div>
+
+      <div class="py-2 flex flex-col">
+        <label class="sub-title mb-2">Payment Method</label>
+        <p>{{ state().payment.paymentMethod }}</p>
+      </div>
+
+      <div class="py-2 flex flex-col">
+        <label class="sub-title mb-2">Amount</label>
+        <p>Base: {{ state().payment.amount | currency : "USD" }}</p>
+        <p>Tax: {{ 0 | currency : "USD" }}</p>
+        <p>Service Fee: {{ 0 | currency : "USD" }}</p>
+        <p>Total: {{ state().payment.amount | currency : "USD" }}</p>
+      </div>
+
+      <div class="py-2 flex flex-col">
+        <label class="sub-title mb-2">Date</label>
+        <p>{{ state().payment.date | date : "fullDate" }}</p>
+      </div>
+
+      <div class="py-2 flex flex-col">
+        <label class="sub-title mb-2">Description</label>
+        <p>{{ state().payment.description || "No description provided" }}</p>
+      </div>
+
+      <div class="py-2 flex flex-col">
+        <label class="sub-title mb-2">Status</label>
+        <p class="font-bold" [ngClass]="{
+            'text-green-600': state().payment.status === 'Completed',
+            'text-yellow-500': state().payment.status === 'Pending',
+            'text-red-600': state().payment.status === 'Failed'
+          }"
+        >
+          @if(state().payment.status === 'Completed') { 
+              Completed 
+          } @else if(state().payment.status === 'Pending') { 
+              Pending 
+          } @else { 
+              Failed 
+          }
+        </p>
+      </div>     
+    </div>
+    <div class="text-gray-500 text-xs pt-8">
+      <p>For any questions or issues regarding your payment, please contact us at <a href="mailto:{{ state().contact.email.support }}" class="text">{{ state().contact.email.support }}</a>.</p>
+      <p class="border-t py-2"><span class="text">Disclaimer</span>: This receipt is auto-generated and does not require a physical signature.</p>
+    </div>
+  </div>
+<!-- </div> -->

@@ -1,0 +1,107 @@
+
+<div class="lg:w-2/3 flex flex-col gap-7">
+    <h1 class="title-medium lg:border-b lg:pb-5">Booking Information</h1>
+
+    <a [routerLink]="['']" class="flex gap-3">
+        <div class="bg-cover bg-center bg-no-repeat h-20 w-20 rounded-sm" [style.backgroundImage]="'url(' + 'bg-host.jpg' + ')'"></div>
+        <div class="flex-1 flex-col">
+            <h4 class="title-small -mt-1 mb-1 lg:mb-0">Entire home in Bozyer, Turkey with a longer lorem ipsum</h4>
+            <p class="text !text-sm">5 guests · 2 bedrooms · 3 beds · 2 baths</p>
+            <p class="sub-title mt-2">Lago, florida</p>
+        </div>
+    </a>
+
+    <!-- if user is guest -->
+    <div class="flex items-center pb-5">
+        <img src="cities/chicago@3x.jpg" alt="Host" class="w-12 h-12 rounded-full mr-4">
+        <div>
+            <h2 class="title-small !text-base">Hosted by Sinan</h2>
+            <p class="text">Host · 2 years hosting</p>
+        </div>
+    </div>
+
+    <div class="flex flex-col text">
+        <h2 class="title-small pb-4 border-b">Booking Details</h2>
+        <div class="mb-6 flex flex-col gap-1 py-3">
+            <p class="flex justify-between">
+                <span class="sub-title">Guest </span>
+                <span>{{ state().booking.guestName }}</span>
+            </p>
+            <p class="flex justify-between">
+                <span class="sub-title">Guest Location </span>
+                <span> Florida, Maimi </span>
+            </p>
+            <p class="flex justify-between">
+                <span class="sub-title">Check-in </span>
+                <span>{{ state().booking.checkInDate | date:'mediumDate' }}</span>
+            </p>
+            <p class="flex justify-between">
+                <span class="sub-title">Check-Out </span>
+                <span>{{ state().booking.checkOutDate | date:'mediumDate' }}</span>
+            </p>
+            <p class="flex justify-between">
+                <span class="sub-title">Booking Requested On</span>
+                <span>{{ state().booking.requestDate | date:'mediumDate' }}</span>
+            </p>
+            <p class="flex justify-between">
+                <span class="sub-title">No. of Guests </span>
+                <span>{{ state().booking.numberOfGuests }}</span>
+            </p>
+            <p class="flex justify-between">
+                <span class="sub-title">Guest types</span>
+                <span> 2 Adults, 1 child, 1 Infant, 4 pets</span>
+            </p>
+            <p class="flex justify-between">
+                <span class="sub-title">Booking Status </span>
+                <span>{{ state().booking.bookingStatus }}</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-col text">
+        <h2 class="title-small pb-4 border-b">Pricing & Payment</h2>
+        <div class="mb-6 flex flex-col gap-1 py-3">
+            <p class="flex justify-between">
+                <span class="sub-title">Total Amount </span>
+                <span class="title-medium">{{ state().booking.totalPrice | currency: 'USD' }}</span>
+            </p>
+            <p class="flex justify-between">
+                <span class="sub-title">Payment Status </span>
+                <span>{{ state().booking.paymentStatus }}</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-col text">
+        <h2 class="title-small pb-4 border-b">Cancelation Policy</h2>
+        <div class="mb-6 flex flex-col gap-1 py-3">
+            <p class="flex justify-between">
+                <span>{{ state().booking.cancellationPolicy }}</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-col text">
+        <h2 class="title-small pb-4 border-b">Review Status</h2>
+        <div class="mb-6 flex flex-col gap-1 py-3">
+            <p class="flex justify-between">
+                <span>{{ state().booking.reviewStatus }}</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="flex justify-between lg:justify-start space-x-4">
+        <a [routerLink]="['']" class="btn">View Rental</a>
+        @if(state().booking.reviewStatus === 'Pending') {
+            <button class="btn !bg-red-600 hover:!bg-red-700">Cancel Booking</button>
+        }
+        @if(state().booking.reviewStatus === 'Pending') {
+            <button class="btn !bg-green-600 hover:!bg-green-700">Accept Booking</button>
+        }
+        @if(state().booking.reviewStatus === 'Pending') {
+            <button class="btn !bg-blue-600 hover:!bg-blue-700">Make Payments</button>
+        }
+      </div>
+
+</div>
+

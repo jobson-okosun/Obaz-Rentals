@@ -1,0 +1,101 @@
+<div class="wow fadeInDown">
+    <h1 class="title-medium mb-5 lg:border-b lg:pb-5">Earnings & Payout</h1>
+
+    <div class="mb-10">
+        <span>Total Earnings</span>
+        <div class="font-black title">$12,000,000.00</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 my-5">
+            <div class="flex flex-col bg-white border shadow-sm rounded-xl">
+                <div class="px-3 py-2">
+                    <div class="flex items-center gap-x-2">
+                        <p class="text-xs uppercase tracking-wide text-gray-500 ">Transactions</p>
+                    </div>
+                    <div class="mt-1 flex items-center gap-x-2">
+                        <h3 class="text-xl sm:text-2xl font-medium text-gray-800">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col bg-white border shadow-sm rounded-xl">
+                <div class="px-3 py-2">
+                    <div class="flex items-center gap-x-2">
+                        <p class="text-xs uppercase tracking-wide text-gray-500 ">Completed</p>
+                    </div>
+                    <div class="mt-1 flex items-center gap-x-2">
+                        <h3 class="text-xl sm:text-2xl font-medium text-gray-800">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col bg-white border shadow-sm rounded-xl">
+                <div class="px-3 py-2">
+                    <div class="flex items-center gap-x-2">
+                        <p class="text-xs uppercase tracking-wide text-gray-500 ">Pending</p>
+                    </div>
+                    <div class="mt-1 flex items-center gap-x-2">
+                        <h3 class="text-xl sm:text-2xl font-medium text-gray-800">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col bg-white border shadow-sm rounded-xl">
+                <div class="px-3 py-2">
+                    <div class="flex items-center gap-x-2">
+                        <p class="text-xs uppercase tracking-wide text-gray-500 ">Failed</p>
+                    </div>
+                    <div class="mt-1 flex items-center gap-x-2">
+                        <h3 class="text-xl sm:text-2xl font-medium text-gray-800">0</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" [autocomplete]="false">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 border border-dashed border-gray-200 rounded-xl p-2 lg:p-5">
+            <div class="form-group col-span-full">
+                <label class="control-label">Request Payout</label>
+                <select formControlName="channel" type="text" class="form-control">
+                    <option value="" [selected]="true" disabled>
+                        -- Select Means of Withdrawal --
+                    </option>
+                    <option value="BANK TRANSFER">bank Transfer</option>
+                </select>
+                <span class="control-error">
+                    @if(form.get('payout.channel')?.touched &&
+                    form.get('payout.channel')?.invalid) {
+                    @if(form.get('payout.channel')?.hasError('required')) {
+                    Identification type is required } }
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Amount</label>
+                <input formControlName="amount" type="number" inputmode="numeric" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Password</label>
+                <div class="relative">
+                    <input id="hs-toggle-password" formControlName="password"  class="form-control">
+                    <button type="button" data-hs-toggle-password='{"target": "#hs-toggle-password"}' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
+                      <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                        <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                        <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                        <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                        <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                        <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </button>
+                </div>
+                <span class="text-xs text-red-500">
+                    @if(form.get('password')?.invalid && form.get('password')?.touched) {
+                        @if(form.get('password')?.hasError('required')) {
+                            Password is required
+                        }
+                    }
+                </span>
+            </div>
+            <div class="flex lg:justify-end mt-4 col-span-full">
+                <button class="btn min-w-full lg:min-w-max" type="button">Request Withdrawal</button>
+            </div>
+        </div>
+        
+    </form>
+</div>

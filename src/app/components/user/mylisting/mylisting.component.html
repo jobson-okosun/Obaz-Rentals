@@ -1,0 +1,10 @@
+<section>
+    <div class="wow fadeInDown">
+        <h1 class="title-medium lg:border-b lg:pb-5">My Listing</h1>
+        <div class="{{ swiperSelector }} grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 lg:gap-5 mt-10">
+            @for(item of list().myListing; track item;) {
+                <rental [prop]="item" />
+            }
+        </div>
+    </div>    
+</section>

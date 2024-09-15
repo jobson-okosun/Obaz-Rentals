@@ -1,6 +1,6 @@
 <section>
-    <div class="wow fadeInDown wcontent bg-gradient-to-br from-[#072a2b] to-[#3d8185] text-white flex flex-col md:flex-row items-center">
-        <div class="md:w-1/2 md:pr-8 p-6 md:p-12 lg:p-24">
+    <div class="wow fadeInDown bg-gradient-to-br from-[#072a2b] to-[#3d8185] text-white flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 p-6 md:p-12 lg:p-24">
             <h1 class="title mb-4 !text-white">Never been easier<br>Finding Cozy & Vibrant Environment</h1>
             <p class="mb-6">With millions of people travelling daily, our Home program allows you to find rentals that are perfect you.</p>
             <ul class="mb-6 space-y-2">
@@ -60,7 +60,7 @@
     </div>    
 </section>
 
-<section>
+<section #cities>
     <div class="wcontent section">
         <h2 class="title">Find Rentals in cities</h2>
         <p class="sub-title lg:w-1/2 my-2">Thousands of renters find a rental for their next job, exploring a new city, relocating, renovating, going on a business trip, or visiting family and friends.</p>
@@ -81,63 +81,66 @@
     </div>    
 </section>
 
-<section class="bg-gray-100">
-    <div class="wcontent section">
-        <h2 class="title">Why book with us</h2>
-        <p class="sub-title lg:w-1/3 my-2">We offer all you need to book your vacation home with confidence</p>
-        <a [routerLink]="['/']" class="text-primary sub-title underline">Read about us</a>
-        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-10 2xl:gap-20 mt-16">
-            <div class="flex flex-col gap-4">
-                <img src="/price-tag.png" alt="" width="50">
-                <h4 class="title-medium">Best pricing</h4>
-                <p class="sub-title">Book directly for the lowest rates</p>
+<section #bookingus class="bg-gray-100">
+    @defer (on viewport(cities)) {
+        <div class="wcontent section">
+            <h2 class="title">Why book with us</h2>
+            <p class="sub-title lg:w-1/3 my-2">We offer all you need to book your vacation home with confidence</p>
+            <a [routerLink]="['/']" class="text-primary sub-title underline">Read about us</a>
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-10 2xl:gap-20 mt-16">
+                <div class="flex flex-col gap-4">
+                    <img src="/price-tag.png" alt="" width="50">
+                    <h4 class="title-medium">Best pricing</h4>
+                    <p class="sub-title">Book directly for the lowest rates</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <img src="/resignation.png" alt="" width="50">
+                    <h4 class="title-medium">Worry-free cancellation</h4>
+                    <p class="sub-title">Get a full refund if you cancel within 24 hours of booking*</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <img src="/customer-support.png" alt="" width="50">
+                    <h4 class="title-medium">24/7 guest service</h4>
+                    <p class="sub-title">Count on care—just a call, text, or email away</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <img src="/clean.png" alt="" width="50">
+                    <h4 class="title-medium">Professional cleaning</h4>
+                    <p class="sub-title">Enjoy a completely cleaned and inspected home, plus fresh linens</p>
+                </div>
             </div>
-            <div class="flex flex-col gap-4">
-                <img src="/resignation.png" alt="" width="50">
-                <h4 class="title-medium">Worry-free cancellation</h4>
-                <p class="sub-title">Get a full refund if you cancel within 24 hours of booking*</p>
-            </div>
-            <div class="flex flex-col gap-4">
-                <img src="/customer-support.png" alt="" width="50">
-                <h4 class="title-medium">24/7 guest service</h4>
-                <p class="sub-title">Count on care—just a call, text, or email away</p>
-            </div>
-            <div class="flex flex-col gap-4">
-                <img src="/clean.png" alt="" width="50">
-                <h4 class="title-medium">Professional cleaning</h4>
-                <p class="sub-title">Enjoy a completely cleaned and inspected home, plus fresh linens</p>
-            </div>
-        </div>
-    </div>    
-</section>
+        </div>    
+    }
+    </section>
 
 
-<section>
-    <div class="grid md:grid-cols-5 gap-10 wcontent section">
-
-        <div class="md:col-span-2 lg:p-10">
-            <h2 class="title">Your questions, answered</h2>
-            <p class="sub-title">Answers to the most frequently asked questions.</p>
-        </div>
-        <div class="md:col-span-3 mx-auto  max-h-screen overflow-y-auto">
-            <div class="hs-accordion-group">
-                @for(item of list().faqs; track item; let first = $first){
-                    <div class="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-3 {{ first && 'active' }}" id="hs-basic-with-title-and-arrow-stretched-heading-{{ item.selector }}">
-                        <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-none focus:text-gray-500" [attr.aria-expanded]="first ? true : false"  
-                        [attr.aria-controls]="'hs-basic-with-title-and-arrow-stretched-collapse-' + item.selector ">
-                            {{ item.title }}
-                            <svg class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                            <svg class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
-                        </button>
-                        <div id="hs-basic-with-title-and-arrow-stretched-collapse-{{ item.selector }}" class="hs-accordion-content w-full {{ !first && 'hidden'}} overflow-hidden transition-[height] duration-300" role="region" [attr.aria-labelledby]="'hs-basic-with-title-and-arrow-stretched-heading-'+item.selector">
-                            <p class="text-gray-800 ">
-                                {{ item.description }}
-                            </p>
+@defer (on viewport(bookingus)) {
+    <section>
+        <div class="grid md:grid-cols-5 gap-10 wcontent section">
+            <div class="md:col-span-2 lg:p-10">
+                <h2 class="title">Your questions, answered</h2>
+                <p class="sub-title">Answers to the most frequently asked questions.</p>
+            </div>
+            <div class="md:col-span-3 mx-auto  max-h-screen overflow-y-auto">
+                <div class="hs-accordion-group">
+                    @for(item of list().faqs; track item; let first = $first){
+                        <div class="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-3 {{ first && 'active' }}" id="hs-basic-with-title-and-arrow-stretched-heading-{{ item.selector }}">
+                            <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-none focus:text-gray-500" [attr.aria-expanded]="first ? true : false"  
+                            [attr.aria-controls]="'hs-basic-with-title-and-arrow-stretched-collapse-' + item.selector ">
+                                {{ item.title }}
+                                <svg class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                <svg class="hs-accordion-active:block hidden shrink-0 size-5 text-gray-600 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                            </button>
+                            <div id="hs-basic-with-title-and-arrow-stretched-collapse-{{ item.selector }}" class="hs-accordion-content w-full {{ !first && 'hidden'}} overflow-hidden transition-[height] duration-300" role="region" [attr.aria-labelledby]="'hs-basic-with-title-and-arrow-stretched-heading-'+item.selector">
+                                <p class="text-gray-800 ">
+                                    {{ item.description }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
-    </div>
-<section>
+    </section>
+}
 

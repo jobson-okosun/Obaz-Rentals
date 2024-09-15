@@ -1,5 +1,5 @@
 <div class="wow fadeInDown wcontent">
-    <div class="flex justify-between items-center gap-5 my-4">
+    <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-2 lg:gap-5 my-4">
         <h1 class="title-medium !font-semibold">Villa olive 2+1 Bozyer with pool</h1>
         <div class="flex">
             <span class="flex items-center space-x-1 filled bg-gray-100 text-xs">
@@ -17,10 +17,10 @@
         </div>
     </div>    
     <div class="grid grid-cols-1 md:grid-cols-4 gap-1 overflow-hidden rounded-lg">
-        <div class="col-span-1 md:col-span-2 h-[400px] 2xl:h-[600px] hover:opacity-80 transition duration-300">
+        <div class="col-span-1 md:col-span-2 h-56 md:h-[400px] 2xl:h-[600px] hover:opacity-80 transition duration-300">
             <img src="cities/boston@3x.jpg" alt="Villa Pool" class="w-full h-full object-cover">
         </div>
-        <div class="col-span-1 md:col-span-2 grid grid-cols-2 gap-1 h-[400px] 2xl:h-[600px]">
+        <div class="col-span-1 md:col-span-2 grid grid-cols-2 gap-1 h-64 md:h-[400px] 2xl:h-[600px]">
             <div class="object-cover overflow-hidden hover:opacity-80 transition duration-300"><img src="cities/boston@3x.jpg" alt="Pool at Night" class="w-full h-full object-cover"></div>
             <div class="object-cover overflow-hidden hover:opacity-80 transition duration-300"><img src="cities/chicago@3x.jpg" alt="Flamingo Pool" class="w-full h-full object-cover"></div>
             <div class="object-cover overflow-hidden hover:opacity-80 transition duration-300"><img src="cities/boston@3x.jpg" alt="Living Room" class="w-full h-full object-cover"></div>
@@ -34,7 +34,7 @@
 
 <div class="wcontent">
     <div class="py-10 flex flex-col lg:flex-row lg:justify-between gap-8">
-        <div class="lg:w-[60%] text max-h-screen overflow-auto no-scroll">
+        <div class="lg:w-[60%] text">
             <div>
                 <h4 class="title-medium !font-semibold truncate">Entire home in Bozyer, Turkey</h4>
                 <p class="mt-1 my-3">5 guests · 2 bedrooms · 3 beds · 2 baths</p>
@@ -119,31 +119,34 @@
                     </div>
                 </div>
             </div>
+            @if(!isMobile()) {
+                <div class="py-5">
+                    <h2 (click)="pickdate.classList.toggle('hidden')" class="title-medium !font-semibold mb-5">Pick Date</h2>
+                    <div  #pickdate class="border w-max">
+                        <calendar (closeEvent)="closeCalender($event);" [config]="{ totalPickers: 2, cancel: false }" />
+                    </div>
+                </div>
+            }
         </div>
         <div class="lg:pl-20">
-            <div class="p-6 rounded-md border shadow-xl shadow-gray-200 bg-white">
+            <div class="p-6 rounded-md border bg-white">
                 <p class="mb-4"><span>$215</span> Night</p>
                 
                 <div class="rounded-md border text-xs">
-                    <div class="hs-dropdown relative">
-                        <div class="grid grid-cols-2 hs-dropdown-toggler" id="hs-dropdown-calendar" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                            <div class="flex flex-col p-3">
-                                <label>MOVE-IN</label>
-                                <input [value]="checkin()" [readonly]="true" type="text" class="border-none outline-none ring-0 mt-1">
-                            </div>
-                            <div class="flex flex-col p-3">
-                                <label>MOVE-OUT</label>
-                                <input [value]="checkout()" [readonly]="true" type="text" class="border-none outline-none ring-0 mt-1">
-                            </div>
-                        </div> 
-                        <div (click)="$event.stopPropagation()" class="z-10 !bg-white border hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-calendar">
-                            <calendar (closeEvent)="closeCalender($event);" [config]="{ totalPickers: 2 }" />
+                    <div class="grid grid-cols-2">
+                        <div class="flex flex-col p-3 hover:bg-gray-100 m-1" (click)="openDatePicker('checkin')" >
+                            <label>MOVE-IN</label>
+                            <input [min]="checkin()" [value]="checkin()" [readonly]="true" type="text" class="bg-transparent border-1 outline-none ring-0 mt-1">
                         </div>
-                    </div>
+                        <div class="flex flex-col p-3 hover:bg-gray-100 m-1" (click)="openDatePicker('checkout')">
+                            <label>MOVE-OUT</label>
+                            <input [min]="checkout()" [value]="checkout()" [readonly]="true" type="text" class="bg-transparent border-1 outline-none ring-0 mt-1">
+                        </div>
+                    </div> 
                     <div class="hs-dropdown relative">
                         <div class="flex flex-col lg:col-span-2 border-t p-3 hs-dropdown-toggler" id="hs-dropdown-guest" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                             <label>GUESTS</label>
-                            <input type="text" class="border-none outline-none ring-0 mt-1">
+                            <input [value]="guest()" [readonly]="true" type="text" class="border-none outline-none ring-0 mt-1">
                         </div>
                         <div (click)="$event.stopPropagation()" class="lg:w-80 p-3 bg-white border hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-guest">
                             <!-- Adult Section -->
@@ -153,9 +156,9 @@
                                 <p class="text-sm text-gray-500">Age 13+</p>
                               </div>
                               <div class="flex items-center space-x-2">
-                                <button (click)="adults.set(adults() - 1 )" [disabled]="adults() < 2" class="border text-gray-600 rounded-full w-8 h-68 flex items-center justify-center text-xl">-</button>
-                                <span class="w-5 text-center">{{ adults() }} </span>
-                                <button (click)="calculateGuest() && adults.set(adults() + 1 )" class="border text-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-xl">+</button>
+                                <button (click)="updateGuests({ adults: guests().adults - 1 })" [disabled]="guests().adults < 2" class="border text-gray-600 rounded-full w-8 h-68 flex items-center justify-center text-xl">-</button>
+                                <span class="w-5 text-center">{{ guests().adults }} </span>
+                                <button (click)="calculateGuest() && updateGuests({ adults: guests().adults + 1 })" class="border text-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-xl">+</button>
                               </div>
                             </div>
                           
@@ -166,9 +169,9 @@
                                 <p class="text-sm text-gray-500">Ages 2–12</p>
                               </div>
                               <div class="flex items-center space-x-2">
-                                <button (click)="children.set(children() - 1 )" [disabled]="children() < 1" class="border text-gray-600 rounded-full w-8 h-68 flex items-center justify-center text-xl">-</button>
-                                <span class="w-5 text-center">{{ children() }} </span>
-                                <button (click)="calculateGuest() && children.set(children() + 1 )" class="border text-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-xl">+</button>
+                                <button (click)="updateGuests({ children: guests().children - 1 })" [disabled]="guests().children < 1" class="border text-gray-600 rounded-full w-8 h-68 flex items-center justify-center text-xl">-</button>
+                                <span class="w-5 text-center">{{ guests().children }} </span>
+                                <button (click)="calculateGuest() && updateGuests({ children: guests().children + 1 })" class="border text-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-xl">+</button>
                               </div>
                             </div>
                           
@@ -179,9 +182,9 @@
                                 <p class="text-sm text-gray-500">Under 2</p>
                               </div>
                               <div class="flex items-center space-x-2">
-                                <button (click)="infant.set(infant() - 1 )" [disabled]="infant() < 1" class="border text-gray-600 rounded-full w-8 h-68 flex items-center justify-center text-xl">-</button>
-                                <span class="w-5 text-center">{{ infant() }} </span>
-                                <button (click)="infant.set(infant() + 1 )" class="border text-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-xl">+</button>
+                                <button (click)="updateGuests({ infant: guests().infant - 1 })" [disabled]="guests().infant < 1" class="border text-gray-600 rounded-full w-8 h-68 flex items-center justify-center text-xl">-</button>
+                                <span class="w-5 text-center">{{ guests().infant }} </span>
+                                <button (click)="updateGuests({ infant: guests().infant + 1 })" class="border text-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-xl">+</button>
                               </div>
                             </div>
                           
@@ -192,9 +195,9 @@
                                 <a href="#" class="text-sm text-blue-500">Bringing a service animal?</a>
                               </div>
                               <div class="flex items-center space-x-2">
-                                <button (click)="pets.set(pets() - 1 )" [disabled]="pets() < 1" class="border text-gray-600 rounded-full w-8 h-68 flex items-center justify-center text-xl">-</button>
-                                <span class="w-5 text-center">{{ pets() }} </span>
-                                <button (click)="pets.set(pets() + 1 )" class="border text-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-xl">+</button>
+                                <button (click)="updateGuests({ pets: guests().pets - 1 })" [disabled]="guests().pets < 1" class="border text-gray-600 rounded-full w-8 h-68 flex items-center justify-center text-xl">-</button>
+                                <span class="w-5 text-center">{{ guests().pets }} </span>
+                                <button (click)="updateGuests({ pets: guests().pets + 1 })" class="border text-gray-600 rounded-full w-8 h-8 flex items-center justify-center text-xl">+</button>
                               </div>
                             </div>
                           
@@ -202,13 +205,13 @@
                             <p class="text mt-4">
                               This place has a maximum of 5 guests, not including infants. If you're bringing more than 2 pets, please let your host know.
                             </p>
-                            <button class="text-black font-medium mt-4">Close</button>
+                            <button  class="text-black font-medium mt-4">Close</button>
                         </div>
                     </div>
                           
                 </div>
 
-                <button class="w-full btn my-5">Request Rental</button>
+                <button type="button" (click)="openBookingDetails()" class="w-full btn my-5">Request Rental</button>
                 <p class="text text-sm text-center">You won't be charged yet</p>
                 <div class="flex flex-col gap-2 !font-normal border-y py-5">
                     <div class="flex justify-between">

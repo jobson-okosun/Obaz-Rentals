@@ -1,0 +1,24 @@
+<div [formGroup]="form()">
+    <h4 class="title-small">Property Ownership Verification</h4>
+    <p class="text text-xs mb-10 lg:pb-5">Please upload the necessary documents for property verification</p>
+
+    <ng-container formGroupName="verification">
+        <div formArrayName="docs" class="grid grid-cols-2 md:grid-cols-3 gap-2 mt-3">
+            @for(item of $any(form().get('verification.docs')).controls; track item; let index=$index) {
+                <div [style.backgroundImage]="'url(' + item.value + ')'"  (click)="selectMedia(index)" class="group transition duration-200 hover:border-primary bg-cover bg-center bg-no-repeat  cursor-pointer rounded-lg border-2 border-dashed flex flex-col items-center justify-center gap-2 p-3">
+                    <span class="transition duration-200 material-symbols-outlined text-gray-300 group-hover:opacity-80"
+                        style="font-size: 30px">add_photo_alternate</span>
+                </div>
+            }
+            <div class="flex items-center gap-2 px-3 py-2 lg:py-0">
+                <button type="button" (click)="addImageInput()" title="Add secondary image" class="material-symbols-outlined icon-btn">
+                    add
+                </button>
+                <button [disabled]="$any(form().get('verification.docs')).controls.length < 2" type="button" (click)="removeLastImageInput()"  title="Remove secondary image"
+                    class="material-symbols-outlined icon-btn !text-red-500">
+                    delete
+                </button>
+            </div> 
+        </div>
+    </ng-container>
+</div>

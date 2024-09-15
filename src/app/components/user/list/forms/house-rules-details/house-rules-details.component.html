@@ -1,0 +1,54 @@
+<div [formGroup]="form()">
+    <h4 class="title-small mb-10 lg:pb-5">House Rules</h4>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="flex justify-start items-center gap-1">
+            <input type="checkbox" formControlName="smokingAllowed" class="form-checkbox" />
+            <label class="control-label">Smoking Allowed</label>
+        </div>
+        <div class="flex justify-start items-center gap-1">
+            <input type="checkbox" formControlName="petsAllowed" class="form-checkbox" />
+            <label class="control-label">Pets Allowed</label>
+        </div>
+        <div class="flex justify-start items-center gap-1">
+            <input type="checkbox" formControlName="eventsAllowed" class="form-checkbox" />
+            <label class="control-label">Events Allowed</label>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Minimum Stay (nights)</label>
+            <input class="form-control" formControlName="minStay" type="number"/>
+            <span class="control-error">
+                @if(form().get('minStay')?.touched && form().get('minStay')?.invalid) {
+                    @if(form().get('minStay')?.hasError('required')) {
+                        Minimum Stay is required.
+                    }
+                    @if(form().get('minStay')?.hasError('min')) {
+                        Minimum Stay must be at least 1 night. 
+                    }
+                }
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Check-In Time</label>
+            <input class="form-control" formControlName="checkInTime" type="time" />
+            <span class="control-error">
+                @if(form().get('checkInTime')?.touched && form().get('checkInTime')?.invalid) {
+                    @if(form().get('checkInTime')?.hasError('required')) {
+                        Check-In Time is required.
+                    } 
+                }
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Check-Out Time</label>
+            <input class="form-control" formControlName="checkOutTime" type="time" />
+            <span class="control-error">
+                @if(form().get('checkOutTime')?.touched && form().get('checkOutTime')?.invalid) {
+                    @if(form().get('checkOutTime')?.hasError('required')) {
+                        Check-Out Time is required.
+                    } 
+                }
+            </span>
+        </div>
+    </div>
+</div>

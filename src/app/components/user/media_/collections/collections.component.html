@@ -1,0 +1,49 @@
+<div class="wow fadeInDown text">
+    <div class="flex gap-3 justify-between mb-10 lg:border-b lg:pb-5">
+        <h1 class="title-medium">My collection</h1>
+        <a [routerLink]="['./', 'upload']" class="btn">Upload</a>
+    </div>
+
+    @if(files().length) {
+
+        @if(selectedFiles.size > 0) {
+            <div class="p-2 fixed inset-0 lg:w-1/3 w-full h-max mx-auto gap-5 bg-secondary text-white rounded-md flex items-center transition ease-in-out animate__animated animate__fadeIn">
+                <span> <span class="font-bold" [innerText]="selectedFiles.size">10</span> item(s) selected</span>
+                <button type="button" (click)="removeFiles($event)" class="rounded border-red-500 border items-center flex gap-2 text-red-500 text-xs font-semibold px-2 py-1">
+                    <span style="font-size: 20px;" class="material-symbols-outlined">Delete</span>
+                    <span>Delete</span>
+                </button>
+            </div>
+        }
+
+        <div class="my-8 transition ease-in-out">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                @for(item of $any(dataSource).data; track item.url; let i = $index) {
+                    <div class="overflow-hidden rounded-md relative border hover:border-gray-300 hover:drop-shadow transition duration-200 ease-in-out">
+                        <img [src]="item.url" alt="Image" class="w-full h-32 object-cover">
+                        <span  class=" cursor-pointer p-2 absolute inset-0 rounded-full h-8 w-8 transition hover:bg-primary-light duration-300 flex items-center justify-center">
+                            <input (input)="selectColletion($event, i)" type="checkbox" class="rounded-md border-gray-400 cursor-pointer ">
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <mat-paginator class="bg-transparent w-full lg:w-max lg:float-right" [length]="totalItems"
+        [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
+    }
+    @else {
+
+        <div class="flex flex-col items-center justify-center mt-10">
+            @if(loaded() == false) {
+                <span class="mb-3">No results</span>
+                <img src="no-data.svg" alt="" class="opacity-30 w-16">
+            }
+            @else {
+                <span class="loader mx-auto"></span>
+            }   
+    </div>
+    
+}
+
+</div>

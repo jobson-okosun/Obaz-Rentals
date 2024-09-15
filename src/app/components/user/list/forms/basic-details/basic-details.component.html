@@ -1,0 +1,114 @@
+<div [formGroup]="form()">
+    <h4 class="title-small">Property Details</h4>
+    <p class="text text-xs mb-10 lg:pb-5">Please fill the correct details for this property</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div class="form-group">
+            <label class="control-label">Property Type</label>
+            <select  formControlName="propertyType" class="form-control">
+                <option value="" selected disabled>Select a type</option>
+                <option value="Apartment">Apartment</option>
+                <option value="House">House</option>
+                <option value="Villa">Villa</option>
+                <option value="Condominium">Condominium (Condo)</option>
+                <option value="Cottage">Cottage</option>
+                <option value="Townhouse">Townhouse</option>
+                <option value="Bungalow">Bungalow</option>
+                <option value="Cabin">Cabin</option>
+                <option value="Loft">Loft</option>
+                <option value="Farmhouse">Farmhouse</option>
+                <option value="Penthouse">Penthouse</option>
+                <option value="Studio">Studio</option>
+                <option value="Chalet">Chalet</option>
+                <option value="Mansion">Mansion</option>
+                <option value="Guesthouse">Guesthouse</option>
+            </select>
+            <span class="control-error">
+              @if(form().get('propertyType')?.touched && form().get('propertyType')?.invalid) {
+                @if(form().get('propertyType')?.hasError('required')) {
+                  Property Type is required.
+                } 
+              }
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Title</label>
+            <input class="form-control" formControlName="title" type="text" placeholder="Unique Name for Your Listing">
+            <span class="control-error">
+              @if(form().get('title')?.touched && form().get('title')?.invalid) {
+                @if(form().get('title')?.hasError('required')) {
+                  Property title is required.
+                } 
+              }
+            </span>
+        </div>
+        <div class="form-group col-span-full">
+            <label class="control-label">description</label>
+            <textarea rows="5" class="form-control" formControlName="description" placeholder="Your lengthy description here"></textarea>
+            <span class="control-error">
+              @if(form().get('description')?.touched && form().get('description')?.invalid) {
+                @if(form().get('description')?.hasError('required')) {
+                  Property description is required.
+                } 
+              }
+            </span>
+        </div>
+        <div class="form-group col-span-full">
+            <label class="control-label">Property Address</label>
+            <input (input)="onSearchAddress($event)" class="form-control" formControlName="address" type="text">
+            <ul [ngClass]="{'border mt-2' : addressSuggestions().length > 0}" class="bg-white  border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto divide-y divide-gray-200">
+              @for(item of addressSuggestions(); track item.place_id) {
+                <li (click)="onSelectSuggestion(item)" class="text text-sm px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors duration-150">
+                  {{ item.display_name }}
+                </li>
+              }
+            </ul>
+            <span class="control-error">
+              @if(form().get('address')?.touched && form().get('address')?.invalid) {
+                @if(form().get('address')?.hasError('required')) {
+                  Property location address is required.
+                } 
+              }
+            </span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 col-span-full">
+          <div class="form-group">
+            <label class="control-label">State</label>
+            <select (change)="onStateChange($event)" class="form-control" formControlName="state" type="text"> 
+              <option value="" disabled selected>Select a state</option>
+               @for(item of states(); track item.name;) {
+                 <option [value]="item.abbreviation">{{ item.name }}</option>
+               }
+            </select>
+            <span class="control-error">
+              @if(form().get('state')?.touched && form().get('state')?.invalid) {
+                @if(form().get('state')?.hasError('required')) {
+                  Property location state is required.
+                } 
+              }
+            </span>
+          </div>
+          <div class="form-group">
+              <label class="control-label">City</label>
+              <select class="form-control" formControlName="city" type="text"> 
+                <option value="" disabled selected>Select a city</option>
+                 @for(item of cities(); track item) {
+                   <option [value]="item">{{ item }}</option>
+                 }
+              </select>
+              <span class="control-error">
+                @if(form().get('city')?.touched && form().get('city')?.invalid) {
+                  @if(form().get('city')?.hasError('required')) {
+                    Property Location city is required.
+                  } 
+                }
+              </span>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Postal Code</label>
+            <input class="form-control" formControlName="postalCode" type="text" />
+          </div>
+        </div>
+    </div>  
+</div>
+ 

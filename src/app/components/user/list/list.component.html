@@ -1,0 +1,88 @@
+<div class="wow fadeInDown">
+    <h1 class="title-medium">List Property</h1>
+    <p class="text text-sm mb-10 border-l-4 border-l-blue-600 p-4 mt-2 lg:border-b">You may not finish the listing at go, always save your progress</p>
+
+    <div data-hs-stepper='{"mode": "non-linear"}'>
+
+        <ul class="relative flex flex-row gap-x-2">
+            @for(item of formSteps(); track item.title) {
+                <li class="flex items-center gap-x-2 shrink basis-0 flex-1 group active" [attr.data-hs-stepper-nav-item]="toJson({index: item.step})">
+                    <span class="min-w-7 min-h-7 group inline-flex items-center text-xs align-middle focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
+                        <span class="size-7 flex justify-center items-center shrink-0 bg-gray-100 font-medium text-gray-800 rounded-full group-focus:bg-gray-200 hs-stepper-active:bg-gray-800 hs-stepper-active:text-white hs-stepper-success:bg-blue-600 hs-stepper-success:text-white hs-stepper-completed:bg-teal-500 hs-stepper-completed:group-focus:bg-teal-600">
+                            <span class="hs-stepper-success:hidden hs-stepper-completed:hidden">{{ item.step }}</span>
+                            <svg class="hidden shrink-0 size-3 hs-stepper-success:block" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </span>
+                        @if(!isMobile()) {
+                            <span class="ms-2 text-sm font-medium text-gray-800 group-focus:text-gray-500">{{ item.title }}</span>
+                        }
+                    </span>
+                    <div
+                        class="w-full h-px flex-1 bg-gray-200 group-last:hidden hs-stepper-success:bg-blue-600 hs-stepper-completed:bg-teal-600">
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="mt-5 sm:mt-8">
+            @for(item of formSteps(); track item.title; let last = $last) {
+                <div [attr.data-hs-stepper-content-item]='toJson({index: item.step})' style="display: none;">
+                    <div class="border border-dashed border-gray-200 rounded-xl p-2 lg:p-5">
+                        @switch (item.step) {
+                            @case (1) {
+                                <app-basic-details [form]="propertyForm" />
+                            }
+                            @case (2) {
+                                <app-pricing-details [form]="propertyForm" />
+                            }
+                            @case (3) {
+                                <app-property-details [form]="propertyForm" />
+                            }
+                            @case (4) {
+                                <app-amenities-details [form]="propertyForm" />
+                            }
+                            @case (5) {
+                                <app-house-rules-details [form]="propertyForm" />
+                            }
+                            @case (6) {
+                                <app-images-details [form]="propertyForm" />
+                            }
+                            @case (7) {
+                                <app-security-verfication-details [form]="propertyForm" />
+                            }
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="mt-5 flex justify-between items-center gap-x-2">
+                <button type="button" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-smhover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                    data-hs-stepper-back-btn="">
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6"></path>
+                    </svg>
+                    Back
+                </button>
+                <button type="button" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-transparent bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none"
+                    data-hs-stepper-next-btn="">
+                    Next
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m9 18 6-6-6-6"></path>
+                    </svg>
+                </button>
+                
+                <button [disabled]="propertyForm.invalid" type="submit" class="btn">
+                    Submit listing
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>

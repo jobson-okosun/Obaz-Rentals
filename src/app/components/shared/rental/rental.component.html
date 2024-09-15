@@ -3,7 +3,7 @@
         <swiper-container init="false">
             @for(imageItem of item()?.images; track imageItem; let i = $index) {
                 <swiper-slide>
-                    <div class="h-56 lg:h-72 w-full rounded-md overflow-hidden relative hover:opacity-80 transition ease-linear duration-300 bg-gray-50">
+                    <div class="h-44 xs:h-48 sm:h-56 lg:h-72 w-full rounded-md overflow-hidden relative hover:opacity-80 transition ease-linear duration-300 bg-gray-50">
                         <img width="auto" height="auto" ngSrc="cities/{{ imageItem.image }}" alt=" {{ imageItem.name }} image" fill>
                     </div>
                 </swiper-slide>

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { APPNAME } from '../../../utils/config';
+import { Component, computed, inject} from '@angular/core';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { RouterLink } from '@angular/router';
 import SearchComponent from '../../search/search/search.component';
+import StateService from '../../../store/state';
+import AppService from '../../../services/app.service';
 
 
 @Component({
@@ -13,11 +14,25 @@ import SearchComponent from '../../search/search/search.component';
   styleUrl: './header.component.css'
 })
 export default class HeaderComponent {
-  appName = APPNAME
+  private _stateService = inject(StateService)
+  private _appService = inject(AppService)
+
+  state = computed(() => this._stateService.currentState())
 
   openNav() {
-    const nav = document.querySelector('nav');
-    (nav as HTMLElement).style.display = 'block'
+    this._appService.openNav()
+  }
+
+  openUserNav() {
+    this._appService.openUserNav()
+  }
+
+  showSearch():boolean {
+    if(!this.state().isMobile) {
+      return true
+    } else if(this.state().isMobile && !this.state().location.includes('user')) {
+      return true
+    } else return false
   }
 
 }

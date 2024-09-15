@@ -14,15 +14,29 @@ export default class StateService {
         hotRentals: [],
         wishlist: [],
         search: [],
+        myListing: [],
+        bookings: [],
+        booking: null,
+        payments: [],
+        payment: null,
         faqs: faqs,
         hostFaqs: hostFaqs,
-        contact: {
-            email: {
-                support: 'info@obazmanagement.com',
-                security: 'security@obazmanagement.com'
-            }
-        }
+        user: null,
+        contact: {email: { support: 'info@obazmanagement.com', security: 'security@obazmanagement.com' }},
+        isMobile: false,
+        isPlatformBrowser: false,
+        webShareSupported: false,
+        location: '/',
     })
 
     currentState = this.state.asReadonly()
+
+    updateStore(data: any) {
+        this.state.update( (update:any) => {
+            Object.keys(data).forEach(key => {
+                update[key] = data[key]
+            })
+            return update
+        })
+    }
 }

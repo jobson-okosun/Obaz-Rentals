@@ -16,7 +16,7 @@ export default class CalendarComponent {
     selectedDate2 = signal(addMonths(new Date(), 1));
 
     closeEvent = output<null | {}>()
-    config = input.required<{ totalPickers: number }>()
+    config = input.required<{ totalPickers: number, cancel?: true | false }>()
 
     apply() {
         const dates = { selected: [this.selectedDate1(), this.selectedDate2() ]}

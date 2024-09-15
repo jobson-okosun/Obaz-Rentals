@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>Request Summary</h2>
+<mat-dialog-content [className]="'md:min-w-[500px] lg:max-h-[500px] 2xl:max-h-max overflow-y-auto px-5'">
+    <div class="grid grid-cols-1 text divide-y text !text-sm">
+        <a [routerLink]="['']" class="flex gap-3 mb-5">
+            <div class="bg-cover bg-center bg-no-repeat h-10 w-10 rounded-full bg-gray-50" [style.backgroundImage]="'url(' + '/bg-host.jpg' + ')'"></div>
+            <div class="flex-1 flex flex-col">
+                <h4 class="title-small -mt-1 mb-1 lg:-mb-1">
+                    Entire home in Bozyer, orem ipsum....
+                </h4>
+                <p class="">5 guests · 2 bedrooms · 3 beds · 2 baths</p>
+            </div>
+        </a>
+
+        <div class="py-2 flex flex-col">
+            <label class="sub-title mb-2">Booking Details</label>
+            <div class="flex justify-between gap-2">
+                <span>No of Nights</span>
+                <span>1</span>
+            </div>
+            <div class="flex justify-between gap-2">
+                <span>Check-In</span>
+                <span>Sat, Oct 10</span>
+            </div>
+            <div class="flex justify-between gap-2">
+                <span>Check-Out</span>
+                <span>Sun, Oct 11</span>
+            </div>
+            </div>
+            
+            <div class="py-2 flex flex-col">
+            <label class="sub-title mb-2">Guest Information</label>
+            <div class="flex justify-between gap-2">
+                <span>1 Adult</span>
+                <span>1</span>
+            </div>
+            <div class="flex justify-between gap-2">
+                <span>2 Children</span>
+                <span>2</span>
+            </div>
+            <div class="flex justify-between gap-2">
+                <span>2 Infants</span>
+                <span>2</span>
+            </div>
+            <div class="flex justify-between gap-2">
+                <span>0 Pets</span>
+                <span>0</span>
+            </div>
+            </div>
+            
+            <div class="py-2 flex flex-col">
+            <label class="sub-title mb-2">Booking cost</label>
+            <div class="flex justify-between gap-2">
+                <span>Base:</span>
+                <span>$0</span>
+            </div>
+            <div class="flex justify-between gap-2">
+                <span>Tax:</span>
+                <span>$0</span>
+            </div>
+            <div class="flex justify-between gap-2">
+                <span>Service Fee:</span>
+                <span>$0</span>
+            </div>
+            <div class="flex justify-between gap-2">
+                <span>Total:</span>
+                <span class="font-bold">$120</span>
+            </div>
+            </div>
+            
+    </div>
+    <div class="bg-gray-100 p-3 text-gray-500 sub-title !text-xs mt-5 rounded-md">
+        <p>Click <strong>Send Request </strong> to proceed. By clicking, you consent to us sharing your information with the host for review. Once approved, we'll notify you to proceed with payment.</p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Send Request</button>
+</mat-dialog-actions>

@@ -1,0 +1,3 @@
+.drag-over {
+    @apply !bg-gray-100 !drop-shadow-sm 
+}

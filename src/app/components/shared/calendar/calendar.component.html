@@ -1,23 +1,22 @@
-<div class="!bg-white sm:flex !font-medium !font-sans">
-    <datepicker [(selectedDate)]="selectedDate1" [config]="{ totalPickers: 2, default:  selectedDate1() }"/>
+<div class="w-max">
+    <div class="!bg-white sm:flex !font-medium !font-sans">
+        <datepicker [(selectedDate)]="selectedDate1" [config]="{ totalPickers: 2, default:  selectedDate1() }"/>
+        @if(config()!.totalPickers > 1) {
+            <datepicker [(selectedDate)]="selectedDate2" [config]="{ totalPickers: 2, default:  selectedDate2() }"/>
+        }
+    </div>  
 
-    @if(config().totalPickers > 1) {
-        <datepicker [(selectedDate)]="selectedDate2" [config]="{ totalPickers: 2, default:  selectedDate2() }"/>
-    }
-</div>
-
-<!-- Button Group -->
-<div class="flex items-center py-3 px-4 justify-end border-t border-gray-200 gap-x-2">
-
-    <span class="md:me-3 text-xs text-gray-500"> {{ selectedDate1() | date:'longDate' }} - {{ selectedDate2() | date:'longDate' }}</span>
-
-    <button type="button" (click)="closeEvent.emit(null)"
-        class="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50">
-        Cancel
-    </button>
-    <button type="button" (click)="apply()"
-        class="py-2 px-3  inline-flex justify-center items-center gap-x-2 text-xs font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-blue-500">
-        Apply
-    </button>
-
+    <div class="flex items-center py-3 px-4 justify-end border-t border-gray-200 gap-x-2 overflow-hidden">
+        <span class="md:me-3 text-xs text-gray-500"> {{ selectedDate1() | date:'longDate' }} {{ config()!.totalPickers > 1 ? (' - ' + (selectedDate2() | date:'longDate')) : '' }} </span>
+        @if(config()!.cancel) {
+            <button type="button" (click)="closeEvent.emit(null)"
+                class="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50">
+                Cancel
+            </button>
+        }
+        <button type="button" (click)="apply()"
+            class="py-2 px-3  inline-flex justify-center items-center gap-x-2 text-xs font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-blue-500">
+            Apply
+        </button>
+    </div>
 </div>

@@ -13,6 +13,7 @@ const route:Routes = [
         loadComponent: () => import('../components/template/template.component'),
         children: [
             { path: '', loadComponent: () => import('../components/home/home.component')},
+            { path: 'user', loadChildren: () => import('../routes/user.routes') },
             { path: 'rooms', loadComponent: () => import('../components/rentals/list/list.component')},
             { path: 'rooms/:title', loadComponent: () => import('../components/rentals/view/view.component')},
             { path: 'feedback/:name', loadComponent: () => import('../components/feedback/feedback.component')},

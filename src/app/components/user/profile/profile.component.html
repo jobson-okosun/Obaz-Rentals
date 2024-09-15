@@ -1,0 +1,145 @@
+<div class="lg:w-2/3 wow fadeInDown">
+    <h1 class="title-medium mb-5 lg:border-b lg:pb-5">My profile</h1>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 border border-dashed border-gray-200 rounded-xl p-2 lg:p-5">
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input formControlName="email" type="email" class="form-control" placeholder="you@example.com" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Phone Number</label>
+                <input formControlName="phone" type="phone" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">First name</label>
+                <input formControlName="firstName" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">last name</label>
+                <input formControlName="lastName" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">State</label>
+                <select (change)="onStateChange($event)" class="form-control" formControlName="state" type="text">
+                    <option value="" disabled selected>Select a state</option>
+                    @for(item of states(); track item.name;) {
+                    <option [value]="item.abbreviation">{{ item.name }}</option>
+                    }
+                </select>
+                <span class="control-error">
+                    @if(form.get('state')?.touched && form.get('state')?.invalid) {
+                    @if(form.get('state')?.hasError('required')) { Your state is required.
+                    } }
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">City</label>
+                <select class="form-control" formControlName="city" type="text">
+                    <option value="" disabled selected>Select a city</option>
+                    @for(item of cities(); track item) {
+                    <option [value]="item">{{ item }}</option>
+                    }
+                </select>
+                <span class="control-error">
+                    @if(form.get('city')?.touched && form.get('city')?.invalid) {
+                    @if(form.get('city')?.hasError('required')) { Your city is required. }
+                    }
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Date of birth</label>
+                <input formControlName="dob" type="date" class="form-control" />
+            </div>
+            <div class="form-group relative">
+                <label class="control-label">Address</label>
+                <input (input)="onSearchAddress($event)" class="form-control" formControlName="address" type="text" />
+                <ul [ngClass]="{ 'border mt-2': addressSuggestions().length > 0 }"
+                    class="bg-white border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto divide-y divide-gray-200">
+                    @for(item of addressSuggestions(); track item.place_id) {
+                    <li (click)="onSelectSuggestion(item)"
+                        class="text text-sm px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors duration-150">
+                        {{ item.display_name }}
+                    </li>
+                    }
+                </ul>
+                <span class="control-error">
+                    @if(form.get('address')?.touched && form.get('address')?.invalid) {
+                    @if(form.get('address')?.hasError('required')) { Your address is
+                    required. } }
+                </span>
+            </div>
+        </div>
+
+        <div class="border border-dashed border-gray-200 rounded-xl p-2 lg:p-5  my-5" formGroupName="verification">
+            <div class="form-group">
+                <label class="control-label">Means of Identification</label>
+                <select formControlName="type" type="text" class="form-control">
+                    <option value="" [selected]="true" disabled>
+                        -- Select Means of Identification --
+                    </option>
+                    <option value="DRIVERS LICENSE">Driver's License</option>
+                    <option value="PASSPORT">U.S. Passport</option>
+                    <option value="PASSPORT CARD">U.S. Passport Card</option>
+                    <option value="STATE ID CARD">State-issued ID Card</option>
+                    <option value="SOCIAL SECURITY CARD">Social Security Card</option>
+                    <option value="BIRTH CERTIFICATE">Birth Certificate</option>
+                    <option value="RESIDENT CARD">
+                        Permanent Resident Card (Green Card)
+                    </option>
+                    <option value="MILITARY ID CARD">Military ID Card</option>
+                    <option value="VISA">U.S. Visa</option>
+                </select>
+                <span class="control-error">
+                    @if(form.get('verification.type')?.touched &&
+                    form.get('verification.type')?.invalid) {
+                    @if(form.get('verification.type')?.hasError('required')) {
+                    Identification type is required } }
+                </span>
+            </div>
+            <div formArrayName="docs">
+                @for(item of $any(form.get('verification.docs')).controls; track item;
+                let index=$index) {
+                <div [style.backgroundImage]="'url(' + item.value + ')'" (click)="selectMedia(index)"
+                    class="group transition duration-200 hover:border-primary bg-cover bg-center bg-no-repeat cursor-pointer rounded-lg border-2 border-dashed flex flex-col items-center justify-center gap-2 p-3">
+                    <span
+                        class="transition duration-200 material-symbols-outlined text-gray-300 group-hover:opacity-80"
+                        style="font-size: 30px">add_photo_alternate</span>
+                </div>
+                }
+            </div>
+        </div>
+
+        <div class="border border-dashed border-gray-200 rounded-xl p-2 lg:p-5  my-5" formGroupName="payout">
+            <div class="form-group">
+                <label class="control-label">Payout information</label>
+                <select formControlName="channel" type="text" class="form-control">
+                    <option value="" [selected]="true" disabled>
+                        -- Select Means of Withdrawal --
+                    </option>
+                    <option value="BANK TRANSFER">bank Transfer</option>
+                </select>
+                <span class="control-error">
+                    @if(form.get('payout.channel')?.touched &&
+                    form.get('payout.channel')?.invalid) {
+                    @if(form.get('payout.channel')?.hasError('required')) {
+                    Identification type is required } }
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Bank Name</label>
+                <input formControlName="bankName" type="text" class="form-control" placeholder="Your bank name" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Bank Account</label>
+                <input formControlName="bankAccount" type="text" class="form-control" placeholder="Your bank account" />
+            </div>
+        </div>
+
+        <div class="flex lg:justify-end gap-2">
+            <button class="btn min-w-full lg:min-w-max" type="button">
+                Verify Account
+            </button>
+        </div>
+    </form>
+</div>

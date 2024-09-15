@@ -1,0 +1,12 @@
+<div [formGroup]="form()">
+    <h4 class="title-small">Amenities</h4>
+    <p class="text text-xs mb-10 lg:pb-5">Tick the avaialable amenties for this property</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" formArrayName="amenities">
+        @for(item of $any(amenities).controls; track item; let i=$index) {
+            <div class="flex justify-start items-center gap-1">
+                <input type="checkbox" [formControlName]="i" class="control-input" />
+                <label class="control-label">{{ amentiesList()[i] }}</label>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="lg:w-2/3  wow fadeInDown">
+    <h1 class="title-medium mb-5 lg:border-b lg:pb-5">Settings</h1>
+    
+    <h4 class="mb-4">Change Password</h4>
+    <form [formGroup]="passwordForm" (ngSubmit)="onPasswordUpdateSubmit()">
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-3 border border-dashed border-gray-200 rounded-xl p-2 lg:p-5">
+            <div class="form-group">
+                <label class="control-label">Current Password</label>
+                <div class="relative">
+                    <input id="hs-toggle-cupassword" formControlName="currentPassword"  class="form-control">
+                    <button type="button" data-hs-toggle-password='{"target": "#hs-toggle-cupassword"}' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
+                      <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                        <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                        <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                        <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                        <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                        <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </button>
+                </div>
+                <span class="text-xs text-red-500">
+                    @if(passwordForm.get('currentPassword')?.invalid && passwordForm.get('currentPassword')?.touched) {
+                        @if(passwordForm.get('currentPassword')?.hasError('required')) {
+                            Password is required
+                        }
+                    }
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">New Password</label>
+                <div class="relative">
+                    <input id="hs-toggle-password" formControlName="password"  class="form-control">
+                    <button type="button" data-hs-toggle-password='{"target": "#hs-toggle-password"}' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
+                      <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                        <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                        <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                        <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                        <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                        <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </button>
+                </div>
+                <span class="text-xs text-red-500">
+                    @if(passwordForm.get('password')?.invalid && passwordForm.get('password')?.touched) {
+                        @if(passwordForm.get('password')?.hasError('required')) {
+                            Password is required
+                        }
+                        @else if(passwordForm.get('password')?.hasError('minlength')) {
+                            Password must be 6 or more characters
+                        }
+                    }
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Confirm New Password</label>
+                <div class="relative">
+                    <input id="hs-toggle-cpassword" formControlName="confirmPassword"  class="form-control">
+                    <button type="button" data-hs-toggle-password='{"target": "#hs-toggle-cpassword"}' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
+                      <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                        <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                        <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                        <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                        <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                        <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </button>
+                </div>
+                <span class="text-xs text-red-500">
+                    @if(passwordForm.get('confirmPassword')?.invalid && passwordForm.get('confirmPassword')?.touched) {
+
+                        @if(passwordForm.get('confirmPassword')?.hasError('required')) {
+                            Confirm Password is required
+                        }
+                    }
+                    @else if(passwordForm.hasError('passwordMismatch') && passwordForm.get('confirmPassword')?.dirty) {
+                            Passwords does not match
+                    }
+                </span>
+            </div>
+        </div>
+        <div class="flex lg:justify-end gap-2 my-5">
+            <button class="btn min-w-full lg:min-w-max" type="submit">Save Changes</button>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,16 @@
+<section>
+    <div class="wcontent overflow-hidden lg:flex lg:flex-row px-5 lg:px-0 py-5">
+        <div id="user-navigation" class="lg:w-[20%] lg:relative fixed top-0 left-0 h-[98vh] bg-gray-900 w-[80%] rounded-tr-xl rounded-br-xl mt-2 z-20 lg:rounded-none lg:mt-0 lg:z-0 lg:h-max lg:bg-transparent py-5 lg:py-0">
+            <div class="relative">
+                <app-user-profile />
+                <user-navigation/>  
+                <svg (click)="closeNav()" class="w-6 h-6 text-gray-100 absolute right-0 top-0 mx-3 lg:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18 17.94 6M18 18 6.06 6"/>
+                </svg>         
+            </div>
+        </div>
+        <div class="lg:flex-1 lg:px-10 overflow-hidden">
+            <router-outlet />
+        </div>
+    </div>
+</section>
