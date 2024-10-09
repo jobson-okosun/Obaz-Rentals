@@ -5,5 +5,15 @@ import { Injectable, signal } from "@angular/core";
 })
 
 export default class ComponentsEventService {
-    events  = signal({})
+
+    events  = signal({
+        authentication: ''
+    })
+
+    setEvent(data: any) {
+        this.events.update((value) => {
+            const update = { ...value, ...data }
+            return update
+        })
+    }
 }

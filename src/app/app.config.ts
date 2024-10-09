@@ -3,15 +3,17 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
+import { RequestInterceptor } from './interceptors/request.interceptor';
+ 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([RequestInterceptor])),
     provideExperimentalZonelessChangeDetection(),
     provideHotToastConfig({ className : 'toast'}), 
     provideAnimationsAsync(), provideAnimationsAsync()
   ]
 };
+ 

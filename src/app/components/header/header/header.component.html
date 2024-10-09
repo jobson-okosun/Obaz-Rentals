@@ -40,13 +40,18 @@
                 </span>
                 <div class="z-10 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-1 space-y-0.5 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full divide-y divide-gray-200 font-medium" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-hover-event">
                     <div class="py-2 first:pt-0 last:pb-0">
-                        <a class="nav-item" href="#">Sign up</a>
-                        <a class="nav-item" href="#">Login</a>
-                        <a class="nav-item" href="#">Sign out</a>
+                        @if(state().user) {
+                            <a class="nav-item" (click)="logoff()">Sign out</a>
+                        }@else {
+                            <a (click)="setAuthEvent('signup')" class="nav-item">Sign up</a>
+                            <a (click)="setAuthEvent('login')" class="nav-item">Login</a>
+                        }
                     </div>
                     <div class="py-2 first:pt-0 last:pb-0">
                         <a class="nav-item" [routerLink]="['/']">Home</a>
-                        <a class="nav-item" [routerLink]="['/user']">My Account</a>
+                        @if(state().user) {
+                            <a class="nav-item" [routerLink]="['/user']">My Account</a>
+                        }
                         <a class="nav-item" [routerLink]="['/host']">List Home</a>
                         <a class="nav-item" [routerLink]="['/contact']">Contact</a>
                     </div>

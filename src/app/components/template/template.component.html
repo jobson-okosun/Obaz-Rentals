@@ -4,3 +4,9 @@
 @if(!state().location.includes('user')) {
     <footer></footer>
 }
+
+@if(events().authentication) {
+    <div class="z-50 fixed top-0 right-0 w-full h-screen bg-[rgba(0,0,0,0.3)] overflow-hidden">
+        <auth /> 
+    </div>
+}
